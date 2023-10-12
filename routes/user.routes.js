@@ -63,7 +63,7 @@ try{
   const user = await UserModel.find({ email_address: email_address });
 }
   catch(err){
-   res.send(err.message)
+   res.json(err.message)
   }
   bcrypt.compare(password, user[0].password, function (err, result) {
     if (result) {
@@ -78,10 +78,10 @@ try{
         .send({ msg: "User logged in", token: token, userID: user[0]._id });
       }
       catch(err){
-        res.status(400).send({ msg: "Wrong credentials", err: err.message });
+        res.status(400).json({ msg: "Wrong credentials", err: err.message });
       }
     } else {
-      res.status(400).send({ msg: "Wrong credentials" });
+      res.status(400).json({ msg: "Wrong credentials" });
     }
   });
 });
