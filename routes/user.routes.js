@@ -59,9 +59,12 @@ userRouter.post("/register", passwordRegulate, async (req, res) => {
 
 userRouter.post("/login", async (req, res) => {
   const { email_address, password } = req.body;
-
+try{
   const user = await UserModel.find({ email_address: email_address });
-
+}
+  catch(err){
+   res.send(err.message)
+  }
   bcrypt.compare(password, user[0].password, function (err, result) {
     if (result) {
       try{
