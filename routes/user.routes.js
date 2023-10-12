@@ -75,7 +75,7 @@ try{
 
       res
         .status(200)
-        .send({ msg: "User logged in", token: token, userID: user[0]._id });
+        .json({ msg: "User logged in", token: token, userID: user[0]._id });
       }
       catch(err){
         res.status(400).json({ msg: "Wrong credentials", err: err.message });
