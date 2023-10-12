@@ -35,6 +35,7 @@ userRouter.post("/register", passwordRegulate, async (req, res) => {
     req.body;
   bcrypt.hash(password, 8, async function (err, hash) {
     if (hash) {
+      try{
       const user = new UserModel({
         first_name,
         last_name,
@@ -44,6 +45,10 @@ userRouter.post("/register", passwordRegulate, async (req, res) => {
       });
       await user.save();
       res.status(200).send({ msg: "User is created" });
+      }
+      catch(err){
+        res.status(400).send({ msg: "Something went wrong. Please try again.", err: err.message });
+      }
     } else {
       res.status(400).send({ msg: "Something went wrong. Please try again." });
     }
