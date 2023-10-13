@@ -31,7 +31,7 @@ productRouter.post("/add", async (req, res) => {
     await product.save();
     res.status(200).send({ msg: "product posted" });
   } catch (err) {
-    res.status(400).send({ msg: "something went wrong" });
+    res.status(400).send({ msg: "something went wrong", err: err.message });
   }
 });
 
