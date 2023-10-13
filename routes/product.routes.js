@@ -8,7 +8,7 @@ productRouter.get("/", async (req, res) => {
     const posts = await ProductModel.find();
     res.status(200).send(posts);
   } catch (err) {
-    res.status(400).send(err);
+    res.status(400).send(err.message);
   }
 });
 
