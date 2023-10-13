@@ -61,10 +61,6 @@ userRouter.post("/login", async (req, res) => {
   const { email_address, password } = req.body;
 try{
   const user = await UserModel.find({ email_address: email_address });
-}
-  catch(err){
-   res.json(err.message)
-  }
   bcrypt.compare(password, user[0].password, function (err, result) {
     if (result) {
       try{
@@ -83,6 +79,11 @@ try{
     } else {
       res.status(400).json({ msg: "Wrong credentials" });
     }
+}
+  catch(err){
+   res.json(err.message)
+  }
+  
   });
 });
 module.exports = { userRouter };
