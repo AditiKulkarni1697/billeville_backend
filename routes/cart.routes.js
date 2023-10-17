@@ -32,7 +32,7 @@ cartRouter.post("/add", auth, async (req, res) => {
     await product.save();
     res.status(200).send({ msg: "product added to cart" });
   } catch (err) {
-    res.status(400).send(err);
+    res.status(400).send(err.message);
   }
 });
 
