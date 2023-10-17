@@ -12,6 +12,7 @@ cartRouter.get("/", auth, async (req, res) => {
 
   const decoded = jwt.verify(token, "bruce");
   try {
+    console.log(decoded)
     const cart = await CartModel.find({ userID: decoded.userID });
     res.status(200).send(cart);
   } catch (err) {
