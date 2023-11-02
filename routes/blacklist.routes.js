@@ -19,13 +19,12 @@ blacklistRouter.get("/", auth, async (req, res) => {
   }
 });
 
-blacklistRouter.post("/add", auth, async (req, res) => {
-  console.log(req.body);
-  const payload = req.body;
+blacklistRouter.get("/add", auth, async (req, res) => {
+  
   const token = req.headers.authorization;
 
   try {
-    const token = new BlacklistModel(payload);
+    const token = new BlacklistModel({token:token});
     await token.save();
     res.status(200).send({ msg: "logged out" });
   } catch (err) {
