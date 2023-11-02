@@ -36,7 +36,7 @@ const transporter = nodemailer.createTransport({
 app.get('/send-email', (req, res) => {
   const toEmail = req.query.email; // Get the dynamic email from the URL parameter
   const otp = req.query.otp
-
+  console.log(toEmail,req.query,"recipient")
   // Email content
   const mailOptions = {
     from: process.env.email,
