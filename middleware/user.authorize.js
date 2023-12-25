@@ -8,13 +8,20 @@ const auth = async (req, res, next) => {
   //console.log(JSON.parse(token), "middleware");
 
   if (token) {
-    jwt.verify(token, "bruce", (err, decoded) => {
+
+    jwt.verify(token, "bruce", async(err, decoded) => {
       console.log(decoded, "decoded", "middleware");
-      if (decoded) {
+      const blacklisted = await BlacklistModel.find({token})
+      if (decoded&&!blacklisted) {
+
         next();
-      } else {
+      } 
+      else if(blacklisted){
+        res.status(401).send("Please login again")
+      }
+      else {
         console.log("err");
-        res.send(err);
+        res.status(401).send("Unauthorized access");
       }
     });
   } else {
