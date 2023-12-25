@@ -2,7 +2,7 @@ const express = require("express");
 const { BlacklistModel } = require("../model/blacklist.model");
 const blacklistRouter = express.Router();
 const jwt = require("jsonwebtoken");
-const { auth } = require("../middleware/user.authorize");
+
 
 ///////////////////////accessible to general user//////////////////////////////////////////////
 blacklistRouter.get("/", async (req, res) => {
