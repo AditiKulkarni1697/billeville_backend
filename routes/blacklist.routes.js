@@ -5,7 +5,7 @@ const jwt = require("jsonwebtoken");
 const { auth } = require("../middleware/user.authorize");
 
 ///////////////////////accessible to general user//////////////////////////////////////////////
-blacklistRouter.get("/", auth, async (req, res) => {
+blacklistRouter.get("/", async (req, res) => {
   //get userID of logged in person
 
   const token = req.headers.authorization;
@@ -19,7 +19,7 @@ blacklistRouter.get("/", auth, async (req, res) => {
   }
 });
 
-blacklistRouter.get("/add", auth, async (req, res) => {
+blacklistRouter.get("/add", async (req, res) => {
   
   const token = req.headers.authorization;
 
