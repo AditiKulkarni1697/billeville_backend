@@ -11,7 +11,7 @@ const auth = async (req, res, next) => {
 
     jwt.verify(token, "bruce", async(err, decoded) => {
       console.log(decoded, "decoded", "middleware");
-      const blacklisted = await BlacklistModel.find({token})
+      const blacklisted = await BlacklistModel.findOne({token})
       if (decoded&&!blacklisted) {
 
         next();
@@ -20,8 +20,8 @@ const auth = async (req, res, next) => {
         res.status(401).send("Please login again")
       }
       else {
-        console.log("err");
-        res.status(401).send("Unauthorized access");
+        console.log(err);
+        res.status(401).send(err);
       }
     });
   } else {
