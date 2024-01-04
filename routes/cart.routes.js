@@ -39,7 +39,7 @@ cartRouter.post("/add", auth, errorHandling ,async (req, res) => {
   }
 });
 
-cartRouter.delete("/delete/:id", auth,, errorHandling, async (req, res) => {
+cartRouter.delete("/delete/:id", auth, errorHandling, async (req, res) => {
   const id = req.params.id; // add id of cart item in params in frontend when delete is clicked
 
   try {
