@@ -3,9 +3,10 @@ const { CartModel } = require("../model/cart.model");
 const cartRouter = express.Router();
 const jwt = require("jsonwebtoken");
 const { auth } = require("../middleware/user.authorize");
+const  { errorHandling } = require("../middleware/error.handleing")
 
 ///////////////////////accessible to general user//////////////////////////////////////////////
-cartRouter.get("/", auth, async (req, res) => {
+cartRouter.get("/", auth, errorHandling, async (req, res) => {
   //get userID of logged in person
 
   const token = req.headers.authorization;
@@ -20,7 +21,7 @@ cartRouter.get("/", auth, async (req, res) => {
   }
 });
 
-cartRouter.post("/add", auth, async (req, res) => {
+cartRouter.post("/add", auth, errorHandling ,async (req, res) => {
   console.log(req.body), "cart route post";
   const payload = req.body;
   const token = req.headers.authorization;
@@ -38,7 +39,7 @@ cartRouter.post("/add", auth, async (req, res) => {
   }
 });
 
-cartRouter.delete("/delete/:id", auth, async (req, res) => {
+cartRouter.delete("/delete/:id", auth,, errorHandling, async (req, res) => {
   const id = req.params.id; // add id of cart item in params in frontend when delete is clicked
 
   try {

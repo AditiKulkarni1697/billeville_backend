@@ -4,6 +4,7 @@ const userRouter = express.Router();
 const bcrypt = require("bcrypt");
 const jwt = require("jsonwebtoken");
 const { passwordRegulate } = require("../middleware/password.regulate");
+const { errorHandling } = require("../middleware/error.handleing")
 
 ////////////////////////////User list///////////////////////////////////////////
 
@@ -30,7 +31,7 @@ userRouter.get("/:id", async (req, res) => {
 
 /////////////////sign up feature for users ////////////////////////////
 
-userRouter.post("/register", passwordRegulate, async (req, res) => {
+userRouter.post("/register", passwordRegulate, errorHandling, async (req, res) => {
   const { first_name, last_name, email_address, password, date_of_birth } =
     req.body;
   bcrypt.hash(password, 8, async function (err, hash) {

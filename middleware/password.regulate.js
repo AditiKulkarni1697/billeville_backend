@@ -9,7 +9,8 @@ const passwordRegulate = (req, res, next) => {
   if (confirm) {
     next();
   } else {
-    res.send("Please input valid password");
+    const err = new Error("Please input valid password")
+    next(err)
   }
 };
 

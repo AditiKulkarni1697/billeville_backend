@@ -17,15 +17,19 @@ const auth = async (req, res, next) => {
         next();
       } 
       else if(blacklisted){
-        res.status(401).send("Please login again")
+        
+        const err = new Error("Please login again")
+         next(err)
       }
       else {
-        console.log(err);
-        res.status(401).send(err);
+        
+    next(err)
       }
     });
   } else {
-    res.send("err middleware");
+    
+    const err = new Error("Please login again")
+    next(err)
   }
 };
 
